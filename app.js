@@ -99,7 +99,7 @@ function printCausers(causers)
 }
 
 async function populate() {
-    const requestURL = "https://raw.githubusercontent.com/Krle97/TechVet/main/01_Source_Code/website/symptom_file.json";
+    const requestURL = "https://raw.githubusercontent.com/Krle97/Krle97.github.io/main/symptom_file.json";
     const request = new Request(requestURL);
   
     const response = await fetch(request);

@@ -20,22 +20,6 @@ rigth_list.addEventListener('click', function(e){
     }
 })
 
-left_list.addEventListener('onchange', function(e){
-    if(e.target != this){
-        rigth_list.appendChild(e.target.cloneNode(true));
-        e.target.remove();
-        updateCausersList();
-    }
-})
-
-rigth_list.addEventListener('onchange', function(e){
-    if(e.target != this){
-        left_list.appendChild(e.target.cloneNode(true));
-        e.target.remove();
-        updateCausersList();
-    }
-})
-
 function updateCausersList()
 {
     // RESET SELECT LIST

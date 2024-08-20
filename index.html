@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="app.css"/>
+    </head>
+    <body onload="populate()">
+        <h1>TechVet</h1>
+
+        <div class="page">
+            <!-- First column with first and third select elements and the text box -->
+            <div class="column">
+                <div class="title">
+                    <p>List of symptoms observed on patient:</p>
+                </div>
+                <div class="list">
+                    <select name="o_symptoms" id="o_symptoms" multiple></select>
+                </div>
+                <div class="list-row">
+                    <select name="commons" id="commons" multiple></select>
+                </div>
+            </div>
+            <!-- Second column with second select element -->
+            <div class="column">
+                <div class="title">
+                    <p>List of all symptoms:</p>
+                </div>
+                <div class="list">
+                    <select name="a_symptoms" id="a_symptoms" multiple></select>
+                </div>
+                <div class="output">
+                    <textarea id="text_output" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="app.js"></script>
+</html>

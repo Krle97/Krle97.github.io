@@ -1241,7 +1241,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HYPOALBUMINAEMIA",
       "specific": "PROTEIN-LOSING ENTEROPATHY AND NEPHROPATHY",
@@ -1249,7 +1249,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HYPOALBUMINAEMIA",
       "specific": "HEPATIC CIRRHOSIS",
@@ -1257,7 +1257,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HYPOALBUMINAEMIA",
       "specific": "HEPATIC PORTOSYSTEMIC SHUNT",
@@ -1265,7 +1265,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HYPOALBUMINAEMIA",
       "specific": "CACHEXIA",
@@ -1273,7 +1273,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HYPOALBUMINAEMIA",
       "specific": "BURN",
@@ -1281,7 +1281,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "TUMOURS",
       "specific": "None",
@@ -1289,7 +1289,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "OBSTRUCTION OF LYMPHATICVESSELS",
       "specific": "None",
@@ -1297,7 +1297,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "TRANSUDATE",
       "causer": "HEPATIC CIRRHOSIS",
       "specific": "None",
@@ -1305,7 +1305,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "MODIFIED TRANSUDATE",
       "causer": "RIGHT SIDED CARDIAC FAILURE",
       "specific": "None",
@@ -1313,7 +1313,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "MODIFIED TRANSUDATE",
       "causer": "PERICARDIAL DISEASE",
       "specific": "None",
@@ -1321,7 +1321,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "MODIFIED TRANSUDATE",
       "causer": "TUMOURS",
       "specific": "None",
@@ -1329,7 +1329,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "PENETRATING WOUNDS",
@@ -1337,7 +1337,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "RUPTURED PYOMETRA",
@@ -1345,7 +1345,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "INTESTINAL PERFORATION",
@@ -1353,7 +1353,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "ILEUS",
@@ -1361,7 +1361,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "SEPTICAEMIA",
@@ -1369,7 +1369,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "RUPTURED ABSCESS",
@@ -1377,7 +1377,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PUS",
       "specific": "PERITONITIS",
@@ -1385,7 +1385,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BLOOD",
       "specific": "TRAUMATIC RUPTURE OF AN ORGAN OR VESSEL",
@@ -1393,7 +1393,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BLOOD",
       "specific": "COAGULOPATHY",
@@ -1401,7 +1401,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BLOOD",
       "specific": "SPLENIC RUPTURE",
@@ -1409,7 +1409,7 @@
       "breed": "DOG"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BLOOD",
       "specific": "HAEMANGIOSARCOMA",
@@ -1417,7 +1417,7 @@
       "breed": "DOG"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "OBSTRUCTION OF LYMPHATIC VESSELS",
@@ -1425,7 +1425,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "RETROPERITONEAL HAEMATOMA",
@@ -1433,7 +1433,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "LYMPHANGIECTASIA",
@@ -1441,7 +1441,7 @@
       "breed": "DOG"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "HEPATIC CIRRHOSIS",
@@ -1449,7 +1449,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "CARDIAC DISEASE",
@@ -1457,7 +1457,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "ILEUS",
@@ -1465,7 +1465,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "ACUTE PANCREATITIS",
@@ -1473,7 +1473,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "CHYLE",
       "specific": "TUMOURS",
@@ -1481,7 +1481,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PSEUDOCHYLOUS EFFUSION",
       "specific": "TUMOURS",
@@ -1489,7 +1489,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "PSEUDOCHYLOUS EFFUSION",
       "specific": "CHRONIC INFLAMMATION",
@@ -1497,7 +1497,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "URINE",
       "specific": "RUPTURE OF THE BLADDER",
@@ -1505,7 +1505,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "URINE",
       "specific": "RUPTURE OF THE URETERAL",
@@ -1513,7 +1513,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "URINE",
       "specific": "URETHRAL AVULSION",
@@ -1521,7 +1521,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BILE",
       "specific": "RUPTURE OF THE GALL BLADDER",
@@ -1529,7 +1529,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "BILE",
       "specific": "HEPATIC RUPTURE",
@@ -1537,7 +1537,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "INTESTINAL TORSION",
@@ -1545,7 +1545,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "INTESTINAL VOLVULUS",
@@ -1553,7 +1553,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "TESTICULAR TORSION",
@@ -1561,7 +1561,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "TESTICULAR CRYPTORCHISM",
@@ -1569,7 +1569,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "GASTRIC RUPTURE",
@@ -1577,7 +1577,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "INTESTINAL RUPTURE",
@@ -1585,7 +1585,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "PANCREATIC RUPTURE",
@@ -1593,7 +1593,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "ACUTE PANCREATITIS",
@@ -1601,7 +1601,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "TUMOURS",
@@ -1609,7 +1609,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "FIP",
@@ -1617,7 +1617,7 @@
       "breed": "CAT"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "DIAPHRAGMATIC HERNIA",
@@ -1625,7 +1625,7 @@
       "breed": "None"
     },
     {
-      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ ASCITES ",
+      "symptom": "ABDOMINAL DISTENTION - ABDOMINAL EFFUSION/ASCITES",
       "type": "EXUDATE",
       "causer": "OTHER CAUSES",
       "specific": "VENA CAVA SYNDROME",
@@ -45010,7 +45010,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "ACUTE PANCREATITIS",
       "specific": "None",
       "details": "None",
@@ -45018,7 +45018,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "PANCREATIC NECROSIS",
       "specific": "None",
       "details": "None",
@@ -45026,7 +45026,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "PANCREATIC TUMOURS",
       "specific": "None",
       "details": "None",
@@ -45034,7 +45034,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "RENAL FAILURE",
       "specific": "None",
       "details": "None",
@@ -45042,7 +45042,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "GASTRIC PERFORATION",
       "specific": "None",
       "details": "None",
@@ -45050,7 +45050,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "INTESTINAL PERFORATION",
       "specific": "None",
       "details": "None",
@@ -45058,7 +45058,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - AMYLASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES}",
       "causer": "GLUCOCORTICOID THERAPY",
       "specific": "None",
       "details": "None",
@@ -45066,7 +45066,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "ACUTE PANCREATITIS",
       "specific": "None",
       "details": "None",
@@ -45074,7 +45074,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "PANCREATIC NECROSIS",
       "specific": "None",
       "details": "None",
@@ -45082,7 +45082,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "PANCREATIC TUMOURS",
       "specific": "None",
       "details": "None",
@@ -45090,7 +45090,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "RENAL FAILURE",
       "specific": "None",
       "details": "None",
@@ -45098,7 +45098,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "LIVER DISEASES",
       "specific": "None",
       "details": "ESP LIVER TUMOURS",
@@ -45106,7 +45106,7 @@
     },
     {
       "symptom": "PANCREATIC PARAMETERS - LIPASE",
-      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
+      "type": "INCREASED PARAMETERS {2�3 TIMES INCREASED}",
       "causer": "GLUCOCORTICOID THERAPY",
       "specific": "None",
       "details": "None",
@@ -56349,7 +56349,7 @@
       "type": "INCREASED PARAMETERS {AZOTAEMIA}",
       "causer": "HYPOCORTISOLISM",
       "specific": "None",
-      "details": "ADDISON�S DISEASE - PRERENAL",
+      "details": "ADDISON�S DISEASE - PRERENAL",
       "breed": "DOG"
     },
     {
@@ -56629,7 +56629,7 @@
       "type": "INCREASED PARAMETERS {AZOTAEMIA}",
       "causer": "HYPOCORTISOLISM",
       "specific": "None",
-      "details": "ADDISON�S DISEASE - PRERENAL",
+      "details": "ADDISON�S DISEASE - PRERENAL",
       "breed": "DOG"
     },
     {
@@ -73315,7 +73315,7 @@
     {
       "symptom": "URINALYSIS - URINE SEDIMENT",
       "type": "CASTS",
-      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
+      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
       "specific": "TUBULAR NEPHROPATHY",
       "details": "None",
       "breed": "None"
@@ -73323,7 +73323,7 @@
     {
       "symptom": "URINALYSIS - URINE SEDIMENT",
       "type": "CASTS",
-      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
+      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
       "specific": "INTERSTITIAL NEPHRITIS",
       "details": "None",
       "breed": "None"
@@ -73331,7 +73331,7 @@
     {
       "symptom": "URINALYSIS - URINE SEDIMENT",
       "type": "CASTS",
-      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
+      "causer": "EPITHELIAL CASTS � GRANULAR CASTS � WAX CASTS",
       "specific": "AMYLOIDOSIS",
       "details": "WAX CYLINDER",
       "breed": "None"

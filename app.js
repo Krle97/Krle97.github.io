@@ -71,30 +71,64 @@ function findCommonElements(symptoms) {
         arrays.push(array);
     }
 
-    // Take the first array and filter its elements
-    return uniq(arrays[0].filter(element => 
-        // Check if this element is in every other array
-        arrays.every(array => array.includes(element))
-    ));
+    return element_comparer(arrays);
 }
 
-function uniq(a) {
-    return a.sort().filter(function(item, pos, ary) {
-        return !pos || item != ary[pos - 1];
-    });
+function element_comparer(arrays)
+{
+    var unique_elements = {}
+    for (var o_array of arrays)
+    {
+        for(var o_element of o_array)
+        {
+            var o_element_match = 0;
+            for (var i_array of arrays)
+            {
+                var new_array = true;
+                for(var i_element of i_array)
+                {
+                    if(i_element == o_element)
+                    {
+                        if(new_array == true)
+                        {
+                            o_element_match++;
+                            new_array = false;
+                        }
+                    }
+                }
+            }
+            unique_elements[o_element] = o_element_match;
+            o_element_match = 0;
+        }
+    }
+    return unique_elements;
 }
 
-function printCausers(causers)
+function printCausers(dict)
 {
     opt_value = 1;
-    for (const causer of causers)
+
+    // Create items array
+    var items = Object.keys(dict).map(function(key) {
+        return [key, dict[key]];
+    });
+
+    // Sort the array based on the second element
+    items.sort(function(first, second) {
+    return second[1] - first[1];
+    });
+
+    for (var item of items)
     {
         const opt = document.createElement("option");
         opt.value = opt_value;
-        opt.text = causer;
-        
-        common_list.add(opt, common_list.options[opt_value]);
-        opt_value++;
+        opt.text = item[0].concat(" : ",item[1]);
+
+        if(item[1] > 1)
+        {
+            common_list.add(opt, common_list.options[opt_value]);
+            opt_value++;
+        }
     }
 }
 

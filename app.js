@@ -6,7 +6,6 @@ var database;
 
 left_list.addEventListener('click', function(e){
     if(e.target != this){
-        rigth_list.appendChild(e.target.cloneNode(true));
         e.target.remove();
         updateCausersList();
     }
@@ -14,11 +13,33 @@ left_list.addEventListener('click', function(e){
 
 rigth_list.addEventListener('click', function(e){
     if(e.target != this){
-        left_list.appendChild(e.target.cloneNode(true));
-        e.target.remove();
+
+        const child = e.target.cloneNode(true);
+        if(!childApendedAlready(child))
+        {
+            left_list.appendChild(child);
+        }
         updateCausersList();
     }
 })
+
+function childApendedAlready(child)
+{
+    var returnVal = false;
+    // GET OBSERVED SYMPTOMS
+    var symptoms = getOptionText(left_list);
+
+    for (const symptom of symptoms)
+    {
+        if(child.text == symptom)
+        {
+            returnVal = true;
+            break;
+        }
+    }
+
+    return returnVal;
+}
 
 function updateCausersList()
 {
@@ -26,10 +47,12 @@ function updateCausersList()
     removeOptions(common_list);
     // GET OBSERVED SYMPTOMS
     var symptoms = getOptionText(left_list);
+    // FIND ALL CAUSERS
+    allCausers = findAllCausers(symptoms);
     // FIND COMMON CAUSERS
-    causers = findCommonElements(symptoms);
+    commonCausers = findCommonCausers(allCausers);
     // PRINT THEM
-    printCausers(causers);
+    printCausers(commonCausers);
 
 }
 
@@ -47,7 +70,7 @@ function getOptionText(select_list)
     return optionNames;
 }
 
-function findCommonElements(symptoms) {
+function findAllCausers(symptoms) {
     var arrays = [];
     var db_symptoms = database.symptoms;
 
@@ -71,34 +94,37 @@ function findCommonElements(symptoms) {
         arrays.push(array);
     }
 
-    return element_comparer(arrays);
+    return arrays;
 }
 
-function element_comparer(arrays)
+function findCommonCausers(arrays)
 {
-    var unique_elements = {}
+    var unique_elements = new Map();
     for (var o_array of arrays)
     {
         for(var o_element of o_array)
         {
-            var o_element_match = 0;
-            for (var i_array of arrays)
+            if(!unique_elements.has(o_element))
             {
-                var new_array = true;
-                for(var i_element of i_array)
+                var o_element_match = 0;
+                for (var i_array of arrays)
                 {
-                    if(i_element == o_element)
+                    var new_array = true;
+                    for(var i_element of i_array)
                     {
-                        if(new_array == true)
+                        if(i_element == o_element)
                         {
-                            o_element_match++;
-                            new_array = false;
+                            if(new_array == true)
+                            {
+                                o_element_match++;
+                                new_array = false;
+                            }
                         }
                     }
                 }
+                unique_elements[o_element] = o_element_match;
+                o_element_match = 0;
             }
-            unique_elements[o_element] = o_element_match;
-            o_element_match = 0;
         }
     }
     return unique_elements;
@@ -118,17 +144,15 @@ function printCausers(dict)
     return second[1] - first[1];
     });
 
+
     for (var item of items)
     {
         const opt = document.createElement("option");
         opt.value = opt_value;
-        opt.text = item[0].concat(" : ",item[1]);
+        opt.text = item[1].toString().concat(" : ",item[0]);
 
-        if(item[1] > 1)
-        {
-            common_list.add(opt, common_list.options[opt_value]);
-            opt_value++;
-        }
+        common_list.add(opt, common_list.options[opt_value]);
+        opt_value++;
     }
 }
 

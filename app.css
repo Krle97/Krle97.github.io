@@ -36,12 +36,12 @@ h1 {
 
 .list select,
 .list-row select {
-    width: 400px;
+    width: 600px;
     height: 200px;
 }
 
 .output textarea{
-    width: 400px; 
+    width: 600px; 
     height: 200px;
     box-sizing: border-box;
     text-align: center;

@@ -1,17 +1,17 @@
 /* app.css */
 body {
     font-family: Arial, sans-serif;
-    margin: 5px;
 }
 
 h1 {
     text-align: center;
+    font-size:48px;
 }
 
-.page {
+.desktop_page {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Spacing between the two columns */
+    gap: 1px;
 }
 
 .column {
@@ -20,22 +20,7 @@ h1 {
     align-items: center;
 }
 
-.title {
-    margin-bottom: 5px;
-}
-
-.list {
-    margin-bottom: 5px;
-}
-
-.list-row {
-    display: flex;
-    gap: 5px;
-    align-items: stretch;
-}
-
-.list select,
-.list-row select {
+.list select {
     width: 600px;
     height: 200px;
 }
@@ -46,4 +31,42 @@ h1 {
     box-sizing: border-box;
     text-align: center;
     overflow-y: auto; /* Add scroll if content overflows */
+    resize: none;
+}
+
+/* MOBILE */
+
+.mobile_page {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.mobile_column
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile_title
+{
+    font-size: 36px;
+}
+
+.mobile_list select {
+    width: 800px;
+    height: 200px;
+    text-align: center;
+    font-size: 48px;
+}
+
+.mobile_output textarea{
+    width: 800px; 
+    height: 600px;
+    box-sizing: border-box;
+    text-align: left;
+    overflow-y: auto; /* Add scroll if content overflows */
+    resize: none;
+    font-size: 18px;
 }

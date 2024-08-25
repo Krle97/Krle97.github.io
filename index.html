@@ -3,10 +3,28 @@
     <head>
         <link rel="stylesheet" href="app.css"/>
     </head>
-    <body onload="populate()">
+    <body onload="startUp()">
         <h1>TechVet</h1>
 
-        <div class="page">
+        <style>
+        @media only screen and (max-width: 1200px)
+        {
+            #desktop 
+            {
+                display: none;
+            }
+        }
+
+        @media only screen and (min-width: 1000px)
+        {
+            #mobile
+            {
+                display: none;
+            }
+        }
+        </style>
+
+        <div id="desktop" class="desktop_page">
             <!-- First column with first and third select elements and the text box -->
             <div class="column">
                 <div class="title">
@@ -15,8 +33,8 @@
                 <div class="list">
                     <select name="o_symptoms" id="o_symptoms" multiple></select>
                 </div>
-                <div class="list-row">
-                    <select name="commons" id="commons" multiple></select>
+                <div class="list">
+                    <select name="common_causers" id="common_causers" multiple></select>
                 </div>
             </div>
             <!-- Second column with second select element -->
@@ -32,6 +50,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- MOBILE -->
+        <div id="mobile" class="mobile_page">
+            <div class="mobile_column">
+                <!-- Second column with second select element -->
+                <div class="mobile_title">
+                    <p>List of all symptoms:</p>
+                </div>
+                <div class="mobile_list">
+                    <select name="mobile_a_symptoms" id="mobile_a_symptoms" multiple></select>
+                </div>
+                <div class="mobile_output">
+                    <textarea id="mobile_o_symptoms" readonly></textarea>
+                </div>
+                <div class="mobile_output">
+                    <textarea id="mobile_common_causers" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
     </body>
     <script src="app.js"></script>
 </html>

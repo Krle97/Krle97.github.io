@@ -174,9 +174,26 @@ function isMobileDevice()
     return regexp.test(details);
 }
 
+function loadProperCss()
+{
+    var cssPath = "mobile.css";
+    if(isMobileDevice() == false)
+    {
+        cssPath = "desktop.css";
+    }
+    
+    var fileref = document.createElement("link");
+    
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", cssPath);
+    
+    document.getElementsByTagName("head")[0].appendChild(fileref);
+}
 
 function startUp()
 {
+    loadProperCss();
     populate(allSymptomsElement);
     EventListeners();
 }

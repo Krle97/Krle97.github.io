@@ -2,54 +2,44 @@ const observedSymptomsElement = document.getElementById("o_symptoms");
 const allSymptomsElement = document.getElementById("a_symptoms");
 const commonCausersElement = document.getElementById("common_causers");
 
-const mobileAllSymptomsElement = document.getElementById("mobile_a_symptoms")
-const mobileObservedSymptomsElement = document.getElementById("mobile_o_symptoms")
-const mobilecommonCausersElement = document.getElementById("mobile_common_causers")
-
 var database;
 
-function desktopEventListeners()
+function EventListeners()
 {
-    observedSymptomsElement.addEventListener('click', function(e){
-        if(e.target != this){
-            e.target.remove();
-            updateCausersList();
-        }
-    })
-    
-    allSymptomsElement.addEventListener('click', function(e){
-        if(e.target != this){
-    
-            const child = e.target.cloneNode(true);
-            if(!childApendedAlready(child))
-            {
-                observedSymptomsElement.appendChild(child);
-            }
-            updateCausersList();
-        }
-    })
+    allSymptomsElement.addEventListener('change', EventCallback);
 }
 
-function mobileEventListeners()
+function EventCallback()
 {
-    mobileAllSymptomsElement.addEventListener('change', mobileEventCallback);
-}
-
-function mobileEventCallback()
-{
-    var selectedSymptoms = mobileGetSelectValues(mobileAllSymptomsElement);
+    var selectedSymptoms = GetSelectValues(allSymptomsElement);
     // PRINT SYMPTOMS
-    mobilePrintObservedSymptoms(selectedSymptoms);
+    PrintObservedSymptoms(selectedSymptoms);
     // FIND ALL CAUSERS
     var allCausers = findAllCausers(selectedSymptoms);
     // FIND COMMON CAUSERS
     var commonCausers = findCommonCausers(allCausers);
     // PRINT ALL CAUSERS
-    mobilePrintCommonCausers(commonCausers);
+    PrintCommonCausers(commonCausers);
 
 }
 
-function mobilePrintObservedSymptoms(selectedSymptoms)
+function  GetSelectValues(select) 
+{
+    var result = [];
+    var options = select && select.options;
+    var opt;
+  
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.text);
+      }
+    }
+    return result;
+}
+
+function PrintObservedSymptoms(selectedSymptoms)
 {
     var result = "";
     var number = 1;
@@ -60,10 +50,10 @@ function mobilePrintObservedSymptoms(selectedSymptoms)
         result = result.concat(temp, "\n");
         number++;
     }
-    mobileObservedSymptomsElement.value = result;
+    observedSymptomsElement.value = result;
 }
 
-function mobilePrintCommonCausers(dict)
+function PrintCommonCausers(dict)
 {
     // Create items array
     var items = Object.keys(dict).map(function(key) {
@@ -81,72 +71,9 @@ function mobilePrintCommonCausers(dict)
         var temp = item[1].toString().concat(" : ",item[0]);
         result = result.concat(temp, "\n");
     }
-    mobilecommonCausersElement.value = result;
+    commonCausersElement.value = result;
 }
 
-function  mobileGetSelectValues(select) 
-{
-    var result = [];
-    var options = select && select.options;
-    var opt;
-  
-    for (var i=0, iLen=options.length; i<iLen; i++) {
-      opt = options[i];
-  
-      if (opt.selected) {
-        result.push(opt.text);
-      }
-    }
-    return result;
-}
-
-
-function childApendedAlready(child)
-{
-    var returnVal = false;
-    // GET OBSERVED SYMPTOMS
-    var symptoms = getOptionText(observedSymptomsElement);
-
-    for (const symptom of symptoms)
-    {
-        if(child.text == symptom)
-        {
-            returnVal = true;
-            break;
-        }
-    }
-
-    return returnVal;
-}
-
-function updateCausersList()
-{
-    // RESET SELECT LIST
-    removeOptions(commonCausersElement);
-    // GET OBSERVED SYMPTOMS
-    var symptoms = getOptionText(observedSymptomsElement);
-    // FIND ALL CAUSERS
-    var allCausers = findAllCausers(symptoms);
-    // FIND COMMON CAUSERS
-    var commonCausers = findCommonCausers(allCausers);
-    // PRINT THEM
-    printCausers(commonCausers);
-
-}
-
-function removeOptions(selectElement) {
-    var i, L = selectElement.options.length - 1;
-    for(i = L; i >= 0; i--) {
-       selectElement.remove(i);
-    }
- }
-
-function getOptionText(select_list) 
-{
-    let selectElement = select_list;
-    let optionNames = [...selectElement.options].map(o => o.text);
-    return optionNames;
-}
 
 function findAllCausers(symptoms) {
     var arrays = [];
@@ -208,32 +135,6 @@ function findCommonCausers(arrays)
     return unique_elements;
 }
 
-function printCausers(dict, html)
-{
-    opt_value = 1;
-
-    // Create items array
-    var items = Object.keys(dict).map(function(key) {
-        return [key, dict[key]];
-    });
-
-    // Sort the array based on the second element
-    items.sort(function(first, second) {
-    return second[1] - first[1];
-    });
-
-
-    for (var item of items)
-    {
-        const opt = document.createElement("option");
-        opt.value = opt_value;
-        opt.text = item[1].toString().concat(" : ",item[0]);
-
-        commonCausersElement.add(opt, commonCausersElement.options[opt_value]);
-        opt_value++;
-    }
-}
-
 async function populate(htmlElement) {
     const requestURL = "https://raw.githubusercontent.com/Krle97/Krle97.github.io/main/symptom_file.json";
     const request = new Request(requestURL);
@@ -276,16 +177,6 @@ function isMobileDevice()
 
 function startUp()
 {
-    var isDeviceMobile = isMobileDevice();
-
-    if(isDeviceMobile == false)
-    {
-        populate(allSymptomsElement);
-        desktopEventListeners();
-    }
-    else
-    {
-        populate(mobileAllSymptomsElement);
-        mobileEventListeners();
-    }
+    populate(allSymptomsElement);
+    EventListeners();
 }

@@ -6,39 +6,9 @@
     <body onload="startUp()">
         <h1>TechVet</h1>
 
-        <style>
-        @media only screen and (max-width: 1200px)
-        {
-            #desktop 
-            {
-                display: none;
-            }
-        }
-
-        @media only screen and (min-width: 1000px)
-        {
-            #mobile
-            {
-                display: none;
-            }
-        }
-        </style>
-
-        <div id="desktop" class="desktop_page">
-            <!-- First column with first and third select elements and the text box -->
+        <div id="page" class="page">
             <div class="column">
-                <div class="title">
-                    <p>List of symptoms observed on patient:</p>
-                </div>
-                <div class="list">
-                    <select name="o_symptoms" id="o_symptoms" multiple></select>
-                </div>
-                <div class="list">
-                    <select name="common_causers" id="common_causers" multiple></select>
-                </div>
-            </div>
-            <!-- Second column with second select element -->
-            <div class="column">
+                <!-- Second column with second select element -->
                 <div class="title">
                     <p>List of all symptoms:</p>
                 </div>
@@ -46,26 +16,10 @@
                     <select name="a_symptoms" id="a_symptoms" multiple></select>
                 </div>
                 <div class="output">
-                    <textarea id="text_output" readonly></textarea>
+                    <textarea id="o_symptoms" readonly></textarea>
                 </div>
-            </div>
-        </div>
-
-        <!-- MOBILE -->
-        <div id="mobile" class="mobile_page">
-            <div class="mobile_column">
-                <!-- Second column with second select element -->
-                <div class="mobile_title">
-                    <p>List of all symptoms:</p>
-                </div>
-                <div class="mobile_list">
-                    <select name="mobile_a_symptoms" id="mobile_a_symptoms" multiple></select>
-                </div>
-                <div class="mobile_output">
-                    <textarea id="mobile_o_symptoms" readonly></textarea>
-                </div>
-                <div class="mobile_output">
-                    <textarea id="mobile_common_causers" readonly></textarea>
+                <div class="output">
+                    <textarea id="common_causers" readonly></textarea>
                 </div>
             </div>
         </div>

@@ -1,13 +1,12 @@
 const CACHE_NAME = 's3geek-v1';
 
-// Files to cache for offline use
+// Files to cache for offline use – all at the root
 const urlsToCache = [
-  '/s3geek/',
-  '/s3geek/index.html',
-  '/s3geek/manifest.json'
+  '/',
+  '/index.html',
+  '/manifest.json'
 ];
 
-// Install: cache the core files
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -18,7 +17,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -34,7 +32,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)

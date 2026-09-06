@@ -1,9 +1,10 @@
 {
+  "id": "/",
   "name": "S3-Geek Controller",
   "short_name": "S3-Geek",
   "description": "Control your ESP32-S3-GEEK over BLE",
-  "start_url": "/s3geek/",
-  "scope": "/s3geek/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f5f7fa",

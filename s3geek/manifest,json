@@ -1,12 +1,13 @@
 {
-  "name": "Krle97 Projects",
-  "short_name": "Krle97",
-  "description": "Project hub for Krle97",
-  "start_url": "/",
+  "name": "S3-Geek Controller",
+  "short_name": "S3-Geek",
+  "description": "Control your ESP32-S3-GEEK over BLE",
+  "start_url": "/s3geek/",
+  "scope": "/s3geek/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f5f7fa",
-  "theme_color": "#1a1a2e",
+  "theme_color": "#28a745",
   "icons": [
     {
       "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>",

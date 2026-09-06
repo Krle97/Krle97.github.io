@@ -1,16 +1,10 @@
-const CACHE_NAME = 'krle97-v1';
+const CACHE_NAME = 's3geek-v1';
 
 // Files to cache for offline use
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/s3geek/',
   '/s3geek/index.html',
-  '/techvet/index.html',
-  '/techvet/app.js',
-  '/techvet/desktop.css',
-  '/techvet/mobile.css',
-  '/techvet/symptom_file.json'
+  '/s3geek/manifest.json'
 ];
 
 // Install: cache the core files
@@ -18,7 +12,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('Opened cache');
+        console.log('S3Geek cache opened');
         return cache.addAll(urlsToCache);
       })
   );
@@ -45,13 +39,10 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached version if found
         if (response) {
           return response;
         }
-        // Otherwise fetch from network
         return fetch(event.request).catch(() => {
-          // If both fail, show a fallback (optional)
           return new Response('Offline', { status: 503 });
         });
       })

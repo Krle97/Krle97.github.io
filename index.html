@@ -4,13 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krle97 – Projects</title>
-
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json" />
-
-  <!-- Apple touch icon (optional, but nice) -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
-
   <style>
     * {
       margin: 0;
@@ -25,8 +18,6 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
-      /* Prevent pull-to-refresh inside the app */
-      overscroll-behavior: none;
     }
     .container {
       max-width: 600px;
@@ -100,17 +91,6 @@
       margin-left: 8px;
       vertical-align: middle;
     }
-    #installBanner {
-      display: none;
-      background: #ffc107;
-      color: #1a1a2e;
-      padding: 14px 18px;
-      border-radius: 12px;
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 20px;
-      font-size: 0.95rem;
-    }
     footer {
       text-align: center;
       font-size: 0.85rem;
@@ -121,9 +101,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- Install banner (only shown when NOT installed) -->
-    <div id="installBanner">📲 Add to Home Screen for fullscreen app experience</div>
-
     <h1>🔧 Krle97</h1>
     <p class="subtitle">A collection of my projects</p>
 
@@ -149,31 +126,5 @@
 
     <footer>More projects coming soon…</footer>
   </div>
-
-  <script>
-    // ============================================================
-    //  Detect if running as installed PWA
-    // ============================================================
-    const installBanner = document.getElementById('installBanner');
-
-    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
-      // Already installed – hide the banner
-      installBanner.style.display = 'none';
-    } else {
-      // Not installed – show the banner on Android devices
-      if (/android/i.test(navigator.userAgent)) {
-        installBanner.style.display = 'block';
-      }
-    }
-
-    // ============================================================
-    //  Register Service Worker (for PWA offline support)
-    // ============================================================
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('✅ Service Worker registered'))
-        .catch((err) => console.log('⚠️ SW registration failed:', err));
-    }
-  </script>
 </body>
 </html>

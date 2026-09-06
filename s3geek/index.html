@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S3-Geek Test</title>
+  <style>
+    body { font-family: system-ui; max-width: 400px; margin: 40px auto; padding: 20px; }
+    button { padding: 16px; font-size: 18px; margin: 5px; border: none; border-radius: 8px; color: white; cursor: pointer; }
+    #connectBtn { background: #28a745; width: 100%; }
+    .cmd-btn { background: #007bff; flex: 1; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    #status { background: #eee; padding: 12px; border-radius: 8px; text-align: center; }
+    #log { background: #fff; padding: 10px; border-radius: 8px; max-height: 150px; overflow-y: auto; font-family: monospace; font-size: 14px; border: 1px solid #ddd; margin-top: 20px; }
+  </style>
+</head>
+<body>
+<h1>🔧 S3-Geek</h1>
+<button id="connectBtn">🔗 Connect</button>
+<div id="status">Disconnected</div>
+<div class="btn-group">
+  <button class="cmd-btn" data-cmd="1">Cmd 1</button>
+  <button class="cmd-btn" data-cmd="2">Cmd 2</button>
+  <button class="cmd-btn" data-cmd="3">Cmd 3</button>
+</div>
+<div id="log">📋 Ready...</div>
+
+<script>
+// ========== UUIDs from your App Inventor blocks ==========
+const SERVICE_UUID        = "12345678-1234-1234-1234-123456789abc";
+const CHARACTERISTIC_UUID = "1234abcd-ef01-1234-1234-123456789abc";
+const DEVICE_NAME         = "S3-Geek-Controller";  // Change if your device name differs
+
+let device, characteristic;
+
+function log(msg) {
+  const div = document.getElementById('log');
+  div.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+  div.scrollTop = div.scrollHeight;
+}
+
+document.getElementById('connectBtn').onclick = async () => {
+  try {
+    log('Scanning for ' + DEVICE_NAME + '...');
+    device = await navigator.bluetooth.requestDevice({
+      filters: [{ name: DEVICE_NAME }],
+      optionalServices: [SERVICE_UUID]
+    });
+    
+    const server = await device.gatt.connect();
+    log('GATT connected');
+    
+    const service = await server.getPrimaryService(SERVICE_UUID);
+    log('✅ Service found!');
+    
+    characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
+    log('✅ Characteristic found! Ready to send commands.');
+    
+    document.getElementById('status').textContent = '✅ Connected';
+    document.getElementById('status').style.background = '#d4edda';
+    
+    device.addEventListener('gattserverdisconnected', () => {
+      document.getElementById('status').textContent = 'Disconnected';
+      document.getElementById('status').style.background = '#eee';
+      log('Disconnected');
+      characteristic = null;
+    });
+    
+  } catch(e) { 
+    log('❌ Error: ' + e.message); 
+  }
+};
+
+document.querySelectorAll('.cmd-btn').forEach(btn => {
+  btn.onclick = async () => {
+    if (!characteristic) return log('⚠️ Not connected');
+    try {
+      const cmd = parseInt(btn.dataset.cmd);
+      await characteristic.writeValue(new Uint8Array([cmd]));
+      log(`📤 Sent: 0x${cmd.toString(16).padStart(2, '0')}`);
+    } catch(e) { 
+      log('❌ Write failed: ' + e.message);
+      characteristic = null;
+    }
+  };
+});
+</script>
+</body>
+</html>

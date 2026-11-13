@@ -2,310 +2,752 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- PWA Manifest (now at root) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <link rel="manifest" href="/manifest.json" />
-
-  <!-- Apple touch icon -->
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>" />
-
+  <meta name="theme-color" content="#28a745" />
   <title>S3-Geek Controller</title>
   <style>
+    :root {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #6c757d;
+      --border: #e3e7ee;
+      --primary: #007bff;
+      --green: #28a745;
+      --red: #dc3545;
+      --chip: #e9ecef;
+      --ok-bg: #d4edda;  --ok-fg: #155724;
+      --err-bg: #f8d7da; --err-fg: #721c24;
+      --code-bg: #1e1e2e; --code-fg: #cdd6f4;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12131a;
+        --card: #1c1e27;
+        --text: #e6e8ef;
+        --muted: #9aa0ad;
+        --border: #2c2f3b;
+        --chip: #2a2d39;
+        --ok-bg: #173b24;  --ok-fg: #a6e3a1;
+        --err-bg: #43191f; --err-fg: #f5a3ad;
+      }
+    }
     * { box-sizing: border-box; }
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      max-width: 420px;
+      max-width: 520px;
       margin: 0 auto;
-      padding: 20px;
-      background: #f5f7fa;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: 16px 16px 40px;
+      background: var(--bg);
+      color: var(--text);
       overscroll-behavior: none;
     }
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      margin: 10px 0 16px;
-      color: #1a1a2e;
+    h1 { text-align: center; font-size: 22px; margin: 6px 0 14px; }
+    h2 { font-size: 15px; margin: 0; }
+    button {
+      font: inherit;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      touch-action: manipulation;
     }
+    button:active { transform: scale(0.97); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+    button.secondary { background: var(--chip); color: var(--text); }
+    button.danger { background: var(--red); }
+    button.green { background: var(--green); }
+    button.small { padding: 7px 11px; font-size: 14px; }
     .card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-      margin-bottom: 16px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      margin-bottom: 12px;
     }
     #status {
       text-align: center;
-      padding: 12px;
+      padding: 10px;
       border-radius: 10px;
-      background: #e9ecef;
+      background: var(--chip);
       font-weight: 500;
-      color: #495057;
-      transition: 0.2s;
-      margin-bottom: 4px;
+      margin-bottom: 10px;
     }
-    #status.connected {
-      background: #d4edda;
-      color: #155724;
+    #status.connected { background: var(--ok-bg); color: var(--ok-fg); }
+    #status.error { background: var(--err-bg); color: var(--err-fg); }
+    #connectBtn { width: 100%; padding: 13px; font-size: 17px; background: var(--green); }
+    .row { display: flex; align-items: center; gap: 8px; }
+    .spread { justify-content: space-between; }
+    .wrap { flex-wrap: wrap; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .chip {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--chip);
+      color: var(--text);
+      white-space: nowrap;
     }
-    #status.error {
-      background: #f8d7da;
-      color: #721c24;
+    .chip.usb-on { background: var(--ok-bg); color: var(--ok-fg); }
+    .chip.usb-off { background: var(--err-bg); color: var(--err-fg); }
+    .chip.waiting { background: #cfe2ff; color: #084298; }
+    .chip.running { background: #fff3cd; color: #7a5a00; }
+    .chip.paused { background: #ffe5cc; color: #8a4500; }
+    .chip.error, .chip.stopped { background: var(--err-bg); color: var(--err-fg); }
+    .chip.done { background: var(--ok-bg); color: var(--ok-fg); }
+    @media (prefers-color-scheme: dark) {
+      .chip.waiting { background: #1d3357; color: #a9c8ff; }
+      .chip.running { background: #4a3d0f; color: #ffe08a; }
+      .chip.paused { background: #4a2e12; color: #ffc690; }
     }
-    #connectBtn {
+    .script { border-top: 1px solid var(--border); padding: 12px 0 4px; }
+    .script:first-child { border-top: none; padding-top: 4px; }
+    .script .name { font-weight: 700; font-size: 16px; word-break: break-all; }
+    .script .countdown { font-variant-numeric: tabular-nums; font-size: 22px; font-weight: 600; margin: 4px 0 2px; }
+    .script .actions { margin-top: 8px; }
+    .script .err { color: var(--err-fg); background: var(--err-bg); border-radius: 8px; padding: 6px 8px; font-size: 13px; margin-top: 6px; }
+    #empty { text-align: center; padding: 12px 0; }
+    #editor[hidden], #main[hidden] { display: none; }
+    label { font-size: 13px; color: var(--muted); display: block; margin: 8px 0 4px; }
+    input[type=text], textarea {
       width: 100%;
-      padding: 14px;
-      font-size: 18px;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      background: #28a745;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.15s;
-      touch-action: manipulation;
+      font: inherit;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
     }
-    #connectBtn:active { transform: scale(0.97); }
-    #connectBtn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-top: 4px;
+    textarea {
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 300px;
+      resize: vertical;
+      white-space: pre;
+      overflow-x: auto;
     }
-    .cmd-btn {
-      padding: 18px 0;
-      font-size: 18px;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      background: #007bff;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.15s;
-      touch-action: manipulation;
-    }
-    .cmd-btn:active { transform: scale(0.95); }
-    .cmd-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .cmd-btn:nth-child(2) { background: #6c757d; }
-    .cmd-btn:nth-child(3) { background: #dc3545; }
+    #editError { display: none; margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--err-bg); color: var(--err-fg); font-size: 14px; }
+    details summary { cursor: pointer; font-weight: 600; font-size: 14px; padding: 4px 0; }
+    .help { font-size: 13px; line-height: 1.6; }
+    .help code, .help pre { font-family: ui-monospace, monospace; background: var(--chip); border-radius: 5px; padding: 1px 5px; }
+    .help pre { padding: 8px; overflow-x: auto; }
     #log {
-      background: #1e1e2e;
-      color: #cdd6f4;
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 13px;
-      max-height: 160px;
+      background: var(--code-bg);
+      color: var(--code-fg);
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+      font-size: 12px;
+      max-height: 200px;
       overflow-y: auto;
-      line-height: 1.6;
-      flex: 1;
-      min-height: 80px;
+      line-height: 1.5;
+      margin-top: 8px;
+      word-break: break-all;
     }
     #log .time { color: #6c7086; }
     #log .ok { color: #a6e3a1; }
     #log .err { color: #f38ba8; }
     #log .info { color: #89b4fa; }
-    .footer {
-      text-align: center;
-      font-size: 13px;
-      color: #6c757d;
-      margin-top: 12px;
-    }
-    #installBanner {
-      display: none;
-      background: #ffc107;
-      color: #1a1a2e;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
+    .footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
   </style>
 </head>
 <body>
 
 <h1>🔧 S3‑Geek</h1>
 
-<div id="installBanner">📲 Add to Home Screen for fullscreen app experience</div>
-
 <div class="card">
   <div id="status">⚡ Disconnected</div>
   <button id="connectBtn">🔗 Connect</button>
 </div>
 
-<div class="card">
-  <div class="btn-grid">
-    <button class="cmd-btn" data-cmd="1">Cmd 1</button>
-    <button class="cmd-btn" data-cmd="2">Cmd 2</button>
-    <button class="cmd-btn" data-cmd="3">Cmd 3</button>
+<!-- ======================= Script list ======================= -->
+<div id="main">
+  <div class="card">
+    <div class="row spread" style="margin-bottom:8px">
+      <h2>Scripts</h2>
+      <div class="row">
+        <span id="usbChip" class="chip">PC: ?</span>
+        <button id="newBtn" class="small" disabled>＋ New</button>
+      </div>
+    </div>
+    <div id="scripts"></div>
+    <div id="empty" class="muted">Connect to see scripts.</div>
   </div>
 </div>
 
-<div class="card" style="flex:1;">
-  <div id="log"><span class="time">⏺</span> <span class="info">Ready — tap Connect</span></div>
+<!-- ======================= Editor ======================= -->
+<div id="editor" hidden>
+  <div class="card">
+    <div class="row spread">
+      <h2 id="editTitle">Edit script</h2>
+      <span id="editBytes" class="muted"></span>
+    </div>
+    <label for="editName">Name (a–z, 0–9, _ -, max 15)</label>
+    <input id="editName" type="text" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="15" />
+    <label for="editSource">Script</label>
+    <textarea id="editSource" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+    <div id="editError"></div>
+    <div class="row wrap" style="margin-top:10px">
+      <button id="saveBtn" class="green">💾 Save</button>
+      <button id="cancelBtn" class="secondary">Cancel</button>
+      <span style="flex:1"></span>
+      <button id="deleteBtn" class="danger">🗑 Delete</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <details>
+      <summary>Script language</summary>
+      <div class="help">
+        <p><b>Schedule</b> (one line, optional):<br>
+          <code>@every 3m</code> run repeatedly ·
+          <code>@after 8h</code> run once ·
+          <code>@manual</code> only with “Run” (default) ·
+          <code>@disabled</code> never scheduled</p>
+        <p><b>Commands</b>:<br>
+          <code>KEY GUI R</code> press keys together (modifiers + up to 6 keys)<br>
+          <code>TEXT hello world</code> type the rest of the line (US layout, ASCII)<br>
+          <code>DELAY 300</code> wait; plain = ms, or <code>2s</code>, <code>1m</code><br>
+          <code>REPEAT 3</code> … <code>END</code> repeat a block<br>
+          <code># comment</code></p>
+        <p><b>Durations</b>: <code>ms s m h</code>, combined like <code>1h30m</code>. For <code>@every/@after</code> a plain number is seconds.</p>
+        <p><b>Keys</b>: letters/digits/symbols (<code>r</code>, <code>5</code>, <code>/</code>), <code>ENTER ESC TAB SPACE BACKSPACE DELETE INSERT HOME END PAGEUP PAGEDOWN UP DOWN LEFT RIGHT F1–F12 NUMLOCK CAPSLOCK SCROLLLOCK PRINTSCREEN PAUSE MENU</code><br>
+        <b>Modifiers</b>: <code>CTRL SHIFT ALT GUI</code> (=<code>WIN</code>), <code>RCTRL RSHIFT RALT RGUI</code></p>
+        <p>Example:</p>
+<pre>@after 30s
+KEY GUI R
+DELAY 300
+TEXT notepad
+KEY ENTER
+DELAY 1s
+TEXT Hello!</pre>
+        <p>Start/Stop/Pause only last until the PC is unplugged. Use <code>@disabled</code> to switch a script off permanently.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="card">
+  <details>
+    <summary>Log</summary>
+    <div id="log"></div>
+  </details>
 </div>
 
 <div class="footer">BLE · no app · no WiFi</div>
 
 <script>
 // ============================================================
-//  UUIDs — match your App Inventor / gatt_svr.c exactly
+//  BLE protocol (see LazyPeon main/ble/ble_protocol.hpp)
 // ============================================================
-const SERVICE_UUID        = "12345678-1234-1234-1234-123456789abc";
-const CHARACTERISTIC_UUID = "1234abcd-ef01-1234-1234-123456789abc";
-const DEVICE_NAME         = "S3-Geek-Controller";
+const SERVICE_UUID = "12345678-1234-1234-1234-123456789abc";
+const RX_UUID      = "1234abcd-ef01-1234-1234-123456789abc"; // phone -> device
+const TX_UUID      = "1234abce-ef01-1234-1234-123456789abc"; // device -> phone (notify)
+const DEVICE_NAME  = "S3-Geek-Controller";
+const PROTO        = 1;
+const WRITE_CHUNK  = 180;   // bytes per BLE write
+const REQ_TIMEOUT  = 20000; // ms
 
-// ============================================================
-//  PWA detection
-// ============================================================
-const installBanner = document.getElementById('installBanner');
-if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
-  installBanner.style.display = 'none';
-} else if (/android/i.test(navigator.userAgent)) {
-  installBanner.style.display = 'block';
-}
+const $ = (id) => document.getElementById(id);
+const statusEl = $('status'), connectBtn = $('connectBtn'), logEl = $('log');
+const scriptsEl = $('scripts'), emptyEl = $('empty'), usbChip = $('usbChip'), newBtn = $('newBtn');
+const mainEl = $('main'), editorEl = $('editor');
+const editTitle = $('editTitle'), editName = $('editName'), editSource = $('editSource');
+const editError = $('editError'), editBytes = $('editBytes');
+const saveBtn = $('saveBtn'), cancelBtn = $('cancelBtn'), deleteBtn = $('deleteBtn');
 
-// ============================================================
-//  DOM refs
-// ============================================================
-const statusEl = document.getElementById('status');
-const logEl    = document.getElementById('log');
-const connectBtn = document.getElementById('connectBtn');
-const cmdBtns    = document.querySelectorAll('.cmd-btn');
+const enc = new TextEncoder();
+let device = null, rxChar = null, txChar = null;
+let decoder = null, lineBuf = '';
+let nextId = 1;
+const pending = new Map();
+let writeChain = Promise.resolve();
 
-let device = null;
-let characteristic = null;
+let limits = { maxScripts: 16, maxSource: 4096, maxName: 15 };
+let state = { usb: false, scripts: [], receivedAt: 0 };
+let editing = null; // { name, original, isNew }
 
-// ============================================================
-//  Log helper
-// ============================================================
+// ------------------------------------------------------------ log
 function log(msg, type = 'info') {
   const time = new Date().toLocaleTimeString();
-  const cls = type === 'ok' ? 'ok' : type === 'err' ? 'err' : 'info';
   const entry = document.createElement('div');
-  entry.innerHTML = `<span class="time">[${time}]</span> <span class="${cls}">${msg}</span>`;
+  const t = document.createElement('span'); t.className = 'time'; t.textContent = `[${time}] `;
+  const m = document.createElement('span'); m.className = type; m.textContent = msg;
+  entry.append(t, m);
   logEl.appendChild(entry);
+  while (logEl.childNodes.length > 200) logEl.removeChild(logEl.firstChild);
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-// ============================================================
-//  Status helper
-// ============================================================
-function setStatus(text, state = '') {
+function setStatus(text, cls = '') {
   statusEl.textContent = text;
-  statusEl.className = state;
+  statusEl.className = cls;
 }
 
-// ============================================================
-//  Connect
-// ============================================================
+// ------------------------------------------------------------ transport
+function sendLine(obj) {
+  const data = enc.encode(JSON.stringify(obj) + '\n');
+  const job = writeChain.then(async () => {
+    if (!rxChar) throw new Error('Not connected');
+    for (let off = 0; off < data.length; off += WRITE_CHUNK) {
+      await rxChar.writeValueWithResponse(data.slice(off, off + WRITE_CHUNK));
+    }
+  });
+  writeChain = job.catch(() => {}); // keep the chain alive after a failure
+  return job;
+}
+
+function request(cmd, args = {}) {
+  const id = nextId++;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      pending.delete(id);
+      reject(new Error(`${cmd}: no reply`));
+    }, REQ_TIMEOUT);
+    pending.set(id, { resolve, reject, timer, cmd });
+    sendLine({ id, cmd, ...args }).catch((e) => {
+      clearTimeout(timer);
+      pending.delete(id);
+      reject(e);
+    });
+  });
+}
+
+function onNotify(event) {
+  lineBuf += decoder.decode(event.target.value, { stream: true });
+  let i;
+  while ((i = lineBuf.indexOf('\n')) >= 0) {
+    const line = lineBuf.slice(0, i);
+    lineBuf = lineBuf.slice(i + 1);
+    if (line.trim()) handleMessage(line);
+  }
+}
+
+function handleMessage(line) {
+  let msg;
+  try { msg = JSON.parse(line); } catch { log('Bad message from device', 'err'); return; }
+
+  if (msg.evt === 'status') {
+    applyStatus(msg);
+    return;
+  }
+  const p = pending.get(msg.id);
+  if (!p) return;
+  pending.delete(msg.id);
+  clearTimeout(p.timer);
+  if (msg.ok) p.resolve(msg);
+  else p.reject(new Error(msg.error || 'failed'));
+}
+
+function failAllPending(reason) {
+  for (const [, p] of pending) { clearTimeout(p.timer); p.reject(new Error(reason)); }
+  pending.clear();
+}
+
+// ------------------------------------------------------------ connect
 async function connect() {
-  if (device && device.gatt && device.gatt.connected) {
+  if (device && device.gatt.connected) {
     device.gatt.disconnect();
     return;
   }
-
+  if (!navigator.bluetooth) {
+    setStatus('❌ Web Bluetooth not available (needs Chrome + https or localhost)', 'error');
+    return;
+  }
   try {
     connectBtn.disabled = true;
-    connectBtn.textContent = '⏳ Scanning...';
-    setStatus('🔍 Scanning...', '');
+    connectBtn.textContent = '⏳ Connecting…';
+    setStatus('🔍 Scanning…');
 
-    log('Scanning for ' + DEVICE_NAME + ' ...');
-
-    device = await navigator.bluetooth.requestDevice({
-      filters: [{ name: DEVICE_NAME }],
-      optionalServices: [SERVICE_UUID]
-    });
-
-    log('✅ Found: ' + device.name, 'ok');
+    if (!device) {
+      device = await navigator.bluetooth.requestDevice({
+        filters: [{ name: DEVICE_NAME }],
+        optionalServices: [SERVICE_UUID],
+      });
+      device.addEventListener('gattserverdisconnected', onDisconnect);
+    }
+    log('Found ' + device.name, 'ok');
 
     const server = await device.gatt.connect();
-    log('🔗 GATT connected', 'ok');
-
     const service = await server.getPrimaryService(SERVICE_UUID);
-    log('📡 Service found', 'ok');
+    rxChar = await service.getCharacteristic(RX_UUID);
+    try {
+      txChar = await service.getCharacteristic(TX_UUID);
+    } catch {
+      throw new Error('Device firmware is too old (no TX characteristic) — flash the new firmware');
+    }
+    decoder = new TextDecoder();
+    lineBuf = '';
+    writeChain = Promise.resolve();
+    txChar.addEventListener('characteristicvaluechanged', onNotify);
 
-    characteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
-    log('📝 Characteristic found — ready!', 'ok');
+    // The device requires a paired (passkey) link. On first connect Android shows a
+    // pairing prompt: enter the 6-digit code from the device's display. Until pairing
+    // finishes, these calls fail, so keep retrying for a while.
+    setStatus('🔐 If asked, enter the 6-digit code shown on the device');
+    await untilPaired(() => txChar.startNotifications());
+    const hello = await untilPaired(() => request('hello'));
+    if (hello.proto !== PROTO) log(`Protocol ${hello.proto}, page expects ${PROTO}`, 'err');
+    limits = { maxScripts: hello.maxScripts, maxSource: hello.maxSource, maxName: hello.maxName };
 
     setStatus('✅ Connected to ' + device.name, 'connected');
     connectBtn.textContent = '🔌 Disconnect';
     connectBtn.disabled = false;
-
-    cmdBtns.forEach(btn => btn.disabled = false);
-
-    device.addEventListener('gattserverdisconnected', onDisconnect);
-
+    newBtn.disabled = false;
+    await refresh();
   } catch (err) {
-    log('❌ ' + err.message, 'err');
+    log(err.message, 'err');
     setStatus('❌ ' + err.message, 'error');
-    connectBtn.textContent = '🔗 Retry';
+    if (err.name === 'NotFoundError') device = null; // chooser cancelled
+    connectBtn.textContent = device ? '🔁 Reconnect' : '🔗 Connect';
     connectBtn.disabled = false;
-    device = null;
-    characteristic = null;
+    rxChar = txChar = null;
+    if (device && device.gatt.connected) device.gatt.disconnect();
   }
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function untilPaired(fn) {
+  const deadline = Date.now() + 90000;
+  let lastErr;
+  while (Date.now() < deadline) {
+    if (!device || !device.gatt.connected) break;
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      await sleep(1500);
+    }
+  }
+  throw new Error('Pairing failed or timed out. If the device was reflashed/erased, remove "' +
+                  DEVICE_NAME + '" in Android Bluetooth settings and connect again.' +
+                  (lastErr ? ` (${lastErr.message})` : ''));
 }
 
 function onDisconnect() {
-  log('⚠️ Disconnected', 'err');
-  setStatus('⚡ Disconnected', '');
-  connectBtn.textContent = '🔗 Connect';
-  cmdBtns.forEach(btn => btn.disabled = true);
-  characteristic = null;
-  device = null;
+  log('Disconnected', 'err');
+  setStatus('⚡ Disconnected — tap Reconnect');
+  connectBtn.textContent = '🔁 Reconnect';
+  connectBtn.disabled = false;
+  newBtn.disabled = true;
+  rxChar = txChar = null;
+  failAllPending('disconnected');
+  state = { usb: false, scripts: [], receivedAt: 0 };
+  if (editing) closeEditor();
+  render();
 }
 
-// ============================================================
-//  Send command (single byte)
-// ============================================================
-async function sendCommand(cmdId) {
-  if (!characteristic) {
-    log('⚠️ Not connected — tap Connect first', 'err');
+// ------------------------------------------------------------ state
+async function refresh() {
+  try {
+    applyStatus(await request('list'));
+  } catch (e) { log('list: ' + e.message, 'err'); }
+}
+
+function applyStatus(msg) {
+  state = { usb: !!msg.usb, scripts: msg.scripts || [], receivedAt: Date.now() };
+  render();
+}
+
+function fmt(sec) {
+  sec = Math.max(0, Math.round(sec));
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  if (h) return `${h}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+  if (m) return `${m}m ${String(s).padStart(2, '0')}s`;
+  return `${s}s`;
+}
+
+function scheduleText(s) {
+  if (s.schedule === 'every') return `every ${fmt(s.period)}`;
+  if (s.schedule === 'after') return `once, ${fmt(s.period)} after connect`;
+  if (s.schedule === 'manual') return 'manual';
+  return 'invalid';
+}
+
+// Seconds left right now, counted down locally from the last status.
+function liveRemaining(s) {
+  if (s.state !== 'waiting' && s.state !== 'running') return s.remaining;
+  if (!state.usb) return s.remaining;
+  const elapsed = (Date.now() - state.receivedAt) / 1000;
+  return Math.max(0, s.remaining - elapsed);
+}
+
+function countdownText(s) {
+  switch (s.state) {
+    case 'waiting': return fmt(liveRemaining(s));
+    case 'running': return 'running…';
+    case 'paused': return '⏸ ' + fmt(s.remaining);
+    case 'stopped': return 'stopped';
+    case 'done': return 'done ✓';
+    case 'manual': return '—';
+    case 'disabled': return 'disabled';
+    case 'error': return 'error';
+    default: return s.state;
+  }
+}
+
+// ------------------------------------------------------------ render
+function button(label, cls, onClick) {
+  const b = document.createElement('button');
+  b.className = 'small ' + (cls || '');
+  b.textContent = label;
+  b.addEventListener('click', async () => {
+    b.disabled = true;
+    try { await onClick(); } finally { b.disabled = false; }
+  });
+  return b;
+}
+
+async function control(cmd, name) {
+  try {
+    await request(cmd, { name });
+    log(`${cmd} ${name}`, 'ok');
+  } catch (e) {
+    log(`${cmd} ${name}: ${e.message}`, 'err');
+    alert(`${cmd} failed: ${e.message}`);
+  }
+  refresh();
+}
+
+function render() {
+  if (!rxChar) {
+    usbChip.className = 'chip';
+    usbChip.textContent = 'PC: ?';
+  } else {
+    usbChip.textContent = state.usb ? 'PC: connected' : 'PC: not connected';
+    usbChip.className = 'chip ' + (state.usb ? 'usb-on' : 'usb-off');
+  }
+
+  scriptsEl.replaceChildren();
+  if (!rxChar) {
+    emptyEl.textContent = 'Connect to see scripts.';
+    emptyEl.style.display = '';
     return;
   }
+  if (!state.scripts.length) {
+    emptyEl.textContent = 'No scripts yet — tap “＋ New”.';
+    emptyEl.style.display = '';
+    return;
+  }
+  emptyEl.style.display = 'none';
 
-  try {
-    const data = new Uint8Array([cmdId]);
-    await characteristic.writeValue(data);
-    log(`📤 Sent: 0x${cmdId.toString(16).padStart(2, '0')} (${cmdId})`, 'ok');
-  } catch (err) {
-    log('❌ Write failed: ' + err.message, 'err');
-    onDisconnect();
+  for (const s of state.scripts) {
+    const el = document.createElement('div');
+    el.className = 'script';
+
+    const head = document.createElement('div');
+    head.className = 'row spread';
+    const name = document.createElement('span');
+    name.className = 'name';
+    name.textContent = s.name;
+    const chip = document.createElement('span');
+    chip.className = 'chip ' + s.state;
+    chip.textContent = s.state;
+    head.append(name, chip);
+
+    const sched = document.createElement('div');
+    sched.className = 'muted';
+    sched.textContent = scheduleText(s) + (s.enabled ? '' : ' · @disabled');
+
+    const cd = document.createElement('div');
+    cd.className = 'countdown';
+    cd.dataset.name = s.name;
+    cd.textContent = countdownText(s);
+
+    el.append(head, sched, cd);
+
+    if (s.error) {
+      const err = document.createElement('div');
+      err.className = 'err';
+      err.textContent = s.error;
+      el.append(err);
+    }
+
+    const actions = document.createElement('div');
+    actions.className = 'row wrap actions';
+    const run = () => {
+      if (confirm(`Run "${s.name}" now?`)) return control('run', s.name);
+    };
+    const timed = s.schedule === 'every' || s.schedule === 'after';
+    switch (s.state) {
+      case 'waiting':
+        actions.append(button('▶ Run now', 'secondary', run),
+                       button('⏸ Pause', 'secondary', () => control('pause', s.name)),
+                       button('⏹ Stop', 'danger', () => control('stop', s.name)));
+        break;
+      case 'running':
+        actions.append(button('⏹ Stop', 'danger', () => control('stop', s.name)));
+        break;
+      case 'paused':
+        actions.append(button('⏵ Resume', 'green', () => control('resume', s.name)),
+                       button('⏹ Stop', 'danger', () => control('stop', s.name)));
+        break;
+      case 'stopped':
+      case 'done':
+      case 'disabled':
+        if (timed) actions.append(button('↻ Start', 'green', () => control('start', s.name)));
+        actions.append(button('▶ Run now', 'secondary', run));
+        break;
+      case 'manual':
+        actions.append(button('▶ Run now', '', run));
+        break;
+    }
+    actions.append(button('✎ Edit', 'secondary', () => openEditor(s.name)));
+    el.append(actions);
+    scriptsEl.append(el);
   }
 }
 
-// ============================================================
-//  Event listeners
-// ============================================================
-connectBtn.addEventListener('click', connect);
+// Update only countdown text once a second (no full re-render, buttons stay put).
+setInterval(() => {
+  for (const cd of scriptsEl.querySelectorAll('.countdown')) {
+    const s = state.scripts.find((x) => x.name === cd.dataset.name);
+    if (s) cd.textContent = countdownText(s);
+  }
+}, 1000);
 
-cmdBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cmd = parseInt(btn.dataset.cmd, 10);
-    sendCommand(cmd);
-  });
+// ------------------------------------------------------------ editor
+const NEW_TEMPLATE = `# New script
+@manual
+KEY GUI R
+DELAY 300
+TEXT notepad
+KEY ENTER
+DELAY 1s
+TEXT Hello from LazyPeon!
+`;
+
+async function openEditor(name) {
+  editError.style.display = 'none';
+  if (name) {
+    try {
+      const r = await request('get', { name });
+      editing = { name, original: r.source, isNew: false };
+    } catch (e) {
+      alert('Could not load script: ' + e.message);
+      return;
+    }
+    editTitle.textContent = 'Edit script';
+    editName.value = name;
+    editName.disabled = true;
+    editSource.value = editing.original;
+    deleteBtn.style.display = '';
+  } else {
+    if (state.scripts.length >= limits.maxScripts) {
+      alert(`Maximum ${limits.maxScripts} scripts`);
+      return;
+    }
+    editing = { name: '', original: NEW_TEMPLATE, isNew: true };
+    editTitle.textContent = 'New script';
+    editName.value = '';
+    editName.disabled = false;
+    editSource.value = NEW_TEMPLATE;
+    deleteBtn.style.display = 'none';
+  }
+  updateBytes();
+  mainEl.hidden = true;
+  editorEl.hidden = false;
+  window.scrollTo(0, 0);
+  (editing.isNew ? editName : editSource).focus();
+}
+
+function closeEditor() {
+  editing = null;
+  editorEl.hidden = true;
+  mainEl.hidden = false;
+}
+
+function updateBytes() {
+  const n = enc.encode(editSource.value).length;
+  editBytes.textContent = `${n} / ${limits.maxSource} B`;
+  editBytes.style.color = n > limits.maxSource ? 'var(--red)' : '';
+}
+
+function showEditError(msg) {
+  editError.textContent = msg;
+  editError.style.display = 'block';
+  // Jump to the line mentioned in "line N: ..."
+  const m = /^line (\d+):/.exec(msg);
+  if (m) {
+    const lines = editSource.value.split('\n');
+    const ln = Math.min(+m[1], lines.length) - 1;
+    const start = lines.slice(0, ln).reduce((a, l) => a + l.length + 1, 0);
+    editSource.focus();
+    editSource.setSelectionRange(start, start + lines[ln].length);
+  }
+}
+
+editSource.addEventListener('input', updateBytes);
+
+saveBtn.addEventListener('click', async () => {
+  const name = editName.value.trim();
+  const source = editSource.value;
+  editError.style.display = 'none';
+  if (!/^[a-z0-9_-]{1,15}$/.test(name)) return showEditError('Name: 1–15 chars, a–z 0–9 _ -');
+  if (editing.isNew && state.scripts.some((s) => s.name === name)) {
+    if (!confirm(`"${name}" already exists. Overwrite it?`)) return;
+  }
+  if (enc.encode(source).length > limits.maxSource) return showEditError(`Script is larger than ${limits.maxSource} bytes`);
+
+  saveBtn.disabled = true;
+  saveBtn.textContent = '⏳ Saving…';
+  try {
+    await request('put', { name, source });
+    log(`saved ${name}`, 'ok');
+    closeEditor();
+    refresh();
+  } catch (e) {
+    showEditError(e.message);
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.textContent = '💾 Save';
+  }
 });
 
-// ============================================================
-//  Init — disable buttons until connected
-// ============================================================
-cmdBtns.forEach(btn => btn.disabled = true);
-log('📱 Open this page in Chrome on Android');
-log('💡 Tap Connect and select your S3‑Geek');
+cancelBtn.addEventListener('click', () => {
+  if (editing && editSource.value !== editing.original && !confirm('Discard changes?')) return;
+  closeEditor();
+});
 
-// ============================================================
-//  Register Service Worker (for PWA offline support)
-// ============================================================
+deleteBtn.addEventListener('click', async () => {
+  if (!editing || editing.isNew) return;
+  if (!confirm(`Delete "${editing.name}" from the device?`)) return;
+  try {
+    await request('delete', { name: editing.name });
+    log(`deleted ${editing.name}`, 'ok');
+    closeEditor();
+    refresh();
+  } catch (e) {
+    showEditError(e.message);
+  }
+});
+
+newBtn.addEventListener('click', () => openEditor(null));
+connectBtn.addEventListener('click', connect);
+
+// ------------------------------------------------------------ init
+render();
+log('Open in Chrome on Android, tap Connect');
+if (!window.isSecureContext) {
+  log(`Not a secure context (${location.origin}) — Bluetooth is blocked. Use https, localhost, or add this exact origin to chrome://flags "Insecure origins treated as secure".`, 'err');
+  setStatus('❌ Insecure page: Bluetooth blocked (see Log)', 'error');
+} else if (!navigator.bluetooth) {
+  log('This browser has no Web Bluetooth — use Chrome on Android.', 'err');
+  setStatus('❌ No Web Bluetooth in this browser', 'error');
+}
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js')
-    .then(() => console.log('✅ Service Worker registered'))
-    .catch((err) => console.log('⚠️ SW registration failed:', err));
+    .catch((err) => console.log('SW registration failed:', err));
 }
 </script>
 </body>
